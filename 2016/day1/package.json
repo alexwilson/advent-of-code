@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "advent-of-code--2016--day1",
+  "main": "main.js",
+  "license": "MIT"
+}
