@@ -4,7 +4,7 @@ const fs = require('fs');
 // Load and parse the input.
 const loadFile = _ => fs.readFileSync(path.resolve(__dirname, "./input.txt")).toString().split(', ')
 
-function calculateDistance(data) {
+function calculateDistanceDelta(data) {
 
     // 360 degrees in a circle.
     const circle = 360;
@@ -43,15 +43,72 @@ function calculateDistance(data) {
 
     }, pathFinder).delta
 
+    return delta;
+}
+
+function calculateDistance(data) {
+    const delta = calculateDistanceDelta(data)
+ 
     // Subtract distance travelled South from North, and East from West.
     const totalDistance = Math.abs(delta[0] - delta[180]) + Math.abs(delta[90] - delta[270])
     return totalDistance
 }
 
-function main() {
-    console.info(`Total distance travelled: ${calculateDistance(loadFile())}`)
+// Utilises the calculateDistanceDelta function to determine when we cross ourselves.
+function firstDuplicateLocation(data) {
+
+    // Utilise a Set as these allow us to easily query for a value. 
+    const visited = new Set()
+    let distance = 0
+
+    try {
+        data.reduce((path, instruction) => {
+
+            const directionInstruction = instruction[0]
+            const stepsInstruction = instruction.slice(1)
+
+            // Build an array from each of the "steps" we must take.
+            // Subtract, as we start at 0, use the spread operator to fill new array with numbered keys. 
+            const arrayFromSteps = Array.from([...Array(stepsInstruction-1).keys()]) 
+
+            arrayFromSteps.forEach(count => {
+                // Call for the current distance delta.
+                const subInstruction = `${directionInstruction}${count}`
+                const delta = calculateDistanceDelta([...path, subInstruction])
+
+                // Extract coordinates.
+                const x = delta[0] - delta[180]
+                const y = delta[90] - delta[270]
+
+                const coordinates = `${x},${y}`
+
+                // If exists in set, break out of the reduce!
+                if (visited.has(coordinates)) {
+                    throw new Error(Math.abs(x)+Math.abs(y))
+                }
+
+                // Push to Set.
+                visited.add(coordinates)
+            })
+
+            // Push overarching path.
+            path.push(instruction)
+
+            return path
+        }, [])
+    } catch (e) {
+        distance = parseInt(e.message)
+    }
+
+    return distance
 }
 
-module.exports = { calculateDistance }
+function main() {
+    const data = loadFile()
+    console.info(`Part 1 - Total distance travelled: ${calculateDistance(data)}`)
+    console.info(`Part 2 - First duplicate location is this far away: ${firstDuplicateLocation(data)}`)
+}
+
+module.exports = { calculateDistance, firstDuplicateLocation }
 
 main()
