@@ -1,8 +1,7 @@
-const path = require('path');
-const fs = require('fs');
+const loadFile = require('../../util/js/loadFile').default
 
 // Load and parse the input.
-const loadFile = _ => fs.readFileSync(path.resolve(__dirname, "./input.txt")).toString().split(', ')
+const loadData = _ => loadFile().split(', ')
 
 function calculateDistanceDelta(data) {
 
@@ -104,7 +103,7 @@ function firstDuplicateLocation(data) {
 }
 
 function main() {
-    const data = loadFile()
+    const data = loadData()
     console.info(`Part 1 - Total distance travelled: ${calculateDistance(data)}`)
     console.info(`Part 2 - First duplicate location is this far away: ${firstDuplicateLocation(data)}`)
 }
