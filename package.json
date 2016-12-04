@@ -1,0 +1,9 @@
+{
+  "name": "advent-of-code",
+  "private": true,
+  "scripts": {
+    "test": "find . -name 'test.js' -execdir node test \\;"
+  },
+  "author": "Alex Wilson <a@ax.gy>",
+  "license": "ISC"
+}
