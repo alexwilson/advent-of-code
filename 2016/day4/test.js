@@ -15,3 +15,8 @@ assert.strictEqual(main.isValidRoom(roomNames[2]), true)
 assert.strictEqual(main.isValidRoom(roomNames[3]), false)
 
 assert.strictEqual(main.sumOfSectors([roomNames[0], roomNames[1], roomNames[2]]), 1514)
+
+assert.strictEqual(main.shiftCipher('hello world', 13), 'uryyb jbeyq')
+assert.strictEqual(main.shiftCipher('hello world', 26), 'hello world')
+
+assert.strictEqual(main.decodeRoomName('qzmt-zixmtkozy-ivhz-343[asdf]'), 'very encrypted name')
