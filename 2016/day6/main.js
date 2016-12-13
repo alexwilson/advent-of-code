@@ -20,22 +20,29 @@ function rowsToColumns(data) {
 }
 
 // Decode by finding the most common character.
-function decode(data) {
+function decode(data, sortFunction) {
 
     // Map over columns and return most frequent character.
     return data.map(value => {
         const histogram = {}
         value.forEach(letter => histogram[letter] = (histogram[letter] || 0) + 1)
-        return Object.keys(histogram).sort((a, b) => histogram[a] - histogram[b]).pop()
+        return Object.keys(histogram).sort(sortFunction.bind({ histogram: histogram })).pop()
     }).join('')
 }
+
+// Most frequent sort.
+function mostFrequentSort (a, b) { return this.histogram[a] - this.histogram[b] }
+
+// Least frequent sort.
+function leastFrequentSort (a, b) { return this.histogram[b] - this.histogram[a] }
 
 // Main function.
 function main() {
     const data = loadData()
-    console.info(`Answer to part 1, message is: ${decode(rowsToColumns(data))}`)
+    console.info(`Answer to part 1, message is: ${decode(rowsToColumns(data), mostFrequentSort)}`)
+    console.info(`Answer to part 2, message is: ${decode(rowsToColumns(data), leastFrequentSort)}`)
 }
 
 main()
 
-module.exports = { decode, rowsToColumns }
+module.exports = { decode, leastFrequentSort, mostFrequentSort, rowsToColumns }

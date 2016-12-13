@@ -20,4 +20,5 @@ vrdear
 dvrsen
 enarar`.split(os.EOL)
 
-assert.strictEqual(main.decode(main.rowsToColumns(easter)), 'easter');
+assert.strictEqual(main.decode(main.rowsToColumns(easter), main.mostFrequentSort), 'easter');
+assert.strictEqual(main.decode(main.rowsToColumns(easter), main.leastFrequentSort), 'advent');
