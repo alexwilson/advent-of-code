@@ -14,7 +14,12 @@ assert.strictEqual(main.isUniquePalindrome('aaaa'), false) ? null : console.info
 assert.strictEqual(main.containsFourLetterPalindrome('asdfabbaasdf'), true) ? null : console.log('passed abba')
 assert.strictEqual(main.containsFourLetterPalindrome('fasdfasdfasd'), false) ? null : console.log('passed asdf')
 
-assert.strictEqual(main.supportsTls('abba[mnop]qrst'), true) ? null : console.log('passed abba[mnop]qrst')
-assert.strictEqual(main.supportsTls('abcd[bddb]xyyx'), false) ? null : console.log('passed abcd[bddb]xyyx')
-assert.strictEqual(main.supportsTls('aaaa[qwer]tyui'), false) ? null : console.log('passed aaaa[qwer]tyui')
-assert.strictEqual(main.supportsTls('ioxxoj[asdfgh]zxcvbn'), true) ? null : console.log('passed ioxxoj[asdfgh]zxcvbn')
+assert.strictEqual(main.supportsTls('abba[mnop]qrst'), true) ? null : console.log('passed - abba[mnop]qrst supports tls')
+assert.strictEqual(main.supportsTls('abcd[bddb]xyyx'), false) ? null : console.log('passed - abcd[bddb]xyyx does not support tls')
+assert.strictEqual(main.supportsTls('aaaa[qwer]tyui'), false) ? null : console.log('passed - aaaa[qwer]tyui does not support tls')
+assert.strictEqual(main.supportsTls('ioxxoj[asdfgh]zxcvbn'), true) ? null : console.log('passed - ioxxoj[asdfgh]zxcvbn supports tls')
+
+assert.strictEqual(main.supportsSsl('aba[bab]xyz'), true) ? null : console.log('passed - aba[bab]xyz supports ssl')
+assert.strictEqual(main.supportsSsl('xyx[xyx]xyx'), false) ? null : console.log('passed - xyx[xyx]xyx does not support ssl')
+assert.strictEqual(main.supportsSsl('aaa[kek]eke'), true) ? null : console.log('passed - aaa[kek]eke supports ssl')
+assert.strictEqual(main.supportsSsl('zazbz[bzb]cdb'), true) ? null : console.log('passed - zazbz[bzb]cdb supports ssl')
