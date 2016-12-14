@@ -2,7 +2,7 @@
   "name": "advent-of-code",
   "private": true,
   "scripts": {
-    "test": "find . -name 'test.js' -execdir node test \\;"
+    "test": "find . -name 'test.js' -execdir node test \\; || exit 2"
   },
   "author": "Alex Wilson <a@ax.gy>",
   "license": "ISC"
