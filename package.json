@@ -1,5 +1,5 @@
 {
-  "name": "advent-of-code",
+  "name": "@alexwilson/advent-of-code",
   "private": true,
   "scripts": {
     "test": "find . -name 'test.js' -execdir node test \\; || exit 2"
